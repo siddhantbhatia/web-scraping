@@ -1,0 +1,19 @@
+{
+  "name": "web-scraping",
+  "version": "1.0.0",
+  "description": "Web scraping with Puppeteer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siddhantbhatia/web-scraping.git"
+  },
+  "author": "Siddhant Bhatia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/siddhantbhatia/web-scraping/issues"
+  },
+  "homepage": "https://github.com/siddhantbhatia/web-scraping#readme"
+}

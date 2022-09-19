@@ -36,7 +36,6 @@
                     "buyers": -2,
                     "sellers": -10
                 },
-                null,
                 {
                     "seq": "5",
                     "name": "BNB",
@@ -105,7 +104,6 @@
                     "buyers": -12,
                     "sellers": -38
                 },
-                null,
                 {
                     "seq": "5",
                     "name": "BNB",
@@ -188,7 +186,6 @@
                     "buyers": -27,
                     "sellers": 270
                 },
-                null,
                 {
                     "seq": "7",
                     "name": "Polygon",
@@ -271,7 +268,6 @@
                     "buyers": -693,
                     "sellers": 89
                 },
-                null,
                 {
                     "seq": "9",
                     "name": "BNB",

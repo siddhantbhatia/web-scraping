@@ -2,7 +2,7 @@
   "name": "web-scraping",
   "version": "1.0.0",
   "description": "Web scraping with Puppeteer",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +12,10 @@
   },
   "author": "Siddhant Bhatia",
   "license": "ISC",
+  "dependencies": {
+    "moment": "^2.29.4",
+    "puppeteer": "^17.1.3"
+  },
   "bugs": {
     "url": "https://github.com/siddhantbhatia/web-scraping/issues"
   },

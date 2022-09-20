@@ -318,7 +318,7 @@
 
       function fetchData(date) {
         return window
-          .fetch(`/.netlify/functions/server/part1?date=${date}`, {
+          .fetch(`/.netlify/functions/server/getData?date=${date}`, {
             method: "GET",
           })
           .then((r) => r.json());

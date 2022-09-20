@@ -39,6 +39,18 @@ router.get("/part1", async (req, res) => {
   }
 });
 
+router.get("/getData", async (req, res) => {
+  res.setHeader("Content-Type", "application/json;charset=utf-8");
+
+  const { date } = req.query;
+  const fileName = "../data/" + date + ".json";
+  const fileData = require(fileName);
+
+  if (fileData) {
+    res.end(JSON.stringify(fileData));
+  }
+});
+
 app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
 app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));

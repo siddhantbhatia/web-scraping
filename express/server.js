@@ -43,7 +43,7 @@ router.get("/getData", async (req, res) => {
   res.setHeader("Content-Type", "application/json;charset=utf-8");
 
   const { date } = req.query;
-  const fileName = "../data/" + date + ".json";
+  const fileName = path.join(__dirname, "../data/" + date + ".json");
   const fileData = require(fileName);
 
   if (fileData) {

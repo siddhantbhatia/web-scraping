@@ -43,7 +43,7 @@ router.get("/getData", async (req, res) => {
   res.setHeader("Content-Type", "application/json;charset=utf-8");
 
   const { date } = req.query;
-  const fileName = path.join(__dirname, "../data/" + date + ".json");
+  const fileName = path.join(__dirname, "../build/data/" + date + ".json");
   const fileData = require(fileName);
 
   if (fileData) {
@@ -53,7 +53,9 @@ router.get("/getData", async (req, res) => {
 
 app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
-app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
+app.use("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "../build/index.html"))
+);
 
 module.exports = app;
 module.exports.handler = serverless(app);

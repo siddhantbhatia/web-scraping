@@ -6,10 +6,10 @@ const serverless = require("serverless-http");
 const bodyParser = require("body-parser");
 const app = express();
 const router = express.Router();
-const file = require("../handlers/file");
+// const file = require("../handlers/file");
 
-const leaderboardHandlers = require("../handlers/leaderboardScrape");
-const chartDataHandlers = require("../handlers/chartDataScrape");
+// const leaderboardHandlers = require("../handlers/leaderboardScrape");
+// const chartDataHandlers = require("../handlers/chartDataScrape");
 
 router.get("/", (req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" });

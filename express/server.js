@@ -17,27 +17,27 @@ router.get("/", (req, res) => {
   res.end();
 });
 
-router.get("/part1", async (req, res) => {
-  res.setHeader("Content-Type", "application/json;charset=utf-8");
+// router.get("/part1", async (req, res) => {
+//   res.setHeader("Content-Type", "application/json;charset=utf-8");
 
-  const { date } = req.query;
-  const fileName = date + ".json";
+//   const { date } = req.query;
+//   const fileName = date + ".json";
 
-  const fileData = file.readFile(fileName);
+//   const fileData = file.readFile(fileName);
 
-  if (fileData) {
-    res.end(JSON.stringify(fileData));
-  } else {
-    const leaderboardData = await leaderboardHandlers.scrapeLeaderboardData();
-    const chartData = await chartDataHandlers.fetchChartData(date);
+//   if (fileData) {
+//     res.end(JSON.stringify(fileData));
+//   } else {
+//     const leaderboardData = await leaderboardHandlers.scrapeLeaderboardData();
+//     const chartData = await chartDataHandlers.fetchChartData(date);
 
-    const output = { leaderboardData, chartData };
+//     const output = { leaderboardData, chartData };
 
-    file.writeFile(fileName, output);
+//     file.writeFile(fileName, output);
 
-    res.end(JSON.stringify(output));
-  }
-});
+//     res.end(JSON.stringify(output));
+//   }
+// });
 
 router.get("/getData", async (req, res) => {
   res.setHeader("Content-Type", "application/json;charset=utf-8");

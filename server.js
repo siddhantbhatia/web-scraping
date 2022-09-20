@@ -1,43 +1,48 @@
-const http = require("http");
-const qs = require("querystring");
-const url = require("url");
+("use strict");
+
+const express = require("express");
+const path = require("path");
+const serverless = require("serverless-http");
+const bodyParser = require("body-parser");
+const app = express();
+const router = express.Router();
 const file = require("./functions/file");
 
 const leaderboardHandlers = require("./functions/leaderboardScrape");
 const chartDataHandlers = require("./functions/chartDataScrape");
 
-http
-  .createServer(async function (req, res) {
-    const { pathname, query } = url.parse(req.url);
+router.get("/", (req, res) => {
+  console.log("hi");
+  res.writeHead(200, { "Content-Type": "text/html" });
+  res.sendFile(path.join(__dirname, "/index.html"));
+  res.end();
+});
 
-    if (req.method !== "GET") {
-      res.end(`{"error": "${http.STATUS_CODES[405]}"}`);
-    } else {
-      if (pathname === "/part1") {
-        res.setHeader("Content-Type", "application/json;charset=utf-8");
+router.get("/part1", async (req, res) => {
+  res.setHeader("Content-Type", "application/json;charset=utf-8");
 
-        const { date } = qs.parse(query);
-        const fileName = date + ".json";
+  const { date } = req.query;
+  const fileName = date + ".json";
 
-        const fileData = file.readFile(fileName);
+  const fileData = file.readFile(fileName);
 
-        if (fileData) {
-          res.end(JSON.stringify(fileData));
-        } else {
-          const leaderboardData =
-            await leaderboardHandlers.scrapeLeaderboardData();
+  if (fileData) {
+    res.end(JSON.stringify(fileData));
+  } else {
+    const leaderboardData = await leaderboardHandlers.scrapeLeaderboardData();
+    const chartData = await chartDataHandlers.fetchChartData(date);
 
-         //  const chartData = await chartDataHandlers.fetchChartData(date);
-          const output = { leaderboardData };
+    const output = { leaderboardData, chartData };
 
-          file.writeFile(fileName, output);
+    file.writeFile(fileName, output);
 
-          res.end(JSON.stringify(output));
-        }
-      }
-    }
-  })
-  .listen(8081);
+    res.end(JSON.stringify(output));
+  }
+});
 
-// Console will print the message
-console.log("Server running at http://127.0.0.1:8081/");
+app.use(bodyParser.json());
+app.use("/.netlify/functions/server", router); // path must route to lambda
+app.use("/", (req, res) => res.sendFile(path.join(__dirname, "/index.html")));
+
+module.exports = app;
+module.exports.handler = serverless(app);
